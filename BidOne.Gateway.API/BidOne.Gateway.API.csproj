@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageReference Include="AutoMapper" Version="15.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BidOne.Gateway.Application\BidOne.Gateway.Application.csproj" />
+    <ProjectReference Include="..\BidOne.Gateway.Cache\BidOne.Gateway.Cache.csproj" />
+    <ProjectReference Include="..\BidOne.Gateway.HttpClients\BidOne.Gateway.HttpClients.csproj" />
+  </ItemGroup>
+
+</Project>
