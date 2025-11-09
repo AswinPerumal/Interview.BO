@@ -38,11 +38,17 @@ namespace BidOne.Gateway.Application.Implementation
             return Task.CompletedTask;
         }
 
-
         public Task SaveResponseAsync(string key, string method, string hash, object? response, int statusCode)
         {
             var compositeKey = BuildKey(key, method, hash);
             Store[compositeKey] = new Entry { IsProcessing = false, Response = response, StatusCode = statusCode };
+            return Task.CompletedTask;
+        }
+
+        public Task RemoveKeyAsync(string key, string method, string hash)
+        {
+            var compositeKey = BuildKey(key, method, hash);
+            Store.TryRemove(compositeKey, out _);
             return Task.CompletedTask;
         }
     }

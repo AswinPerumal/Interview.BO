@@ -32,7 +32,8 @@ namespace BidOne.Gateway.API.Filters
 
             var method = context.HttpContext.Request.Method;
             var bodyStr = await ReadBodyAsync(context.HttpContext.Request);
-            string hash = ComputeBodyHash(bodyStr);
+            var endpoint = context.HttpContext.Request.Path;
+            string hash = ComputeBodyHash(bodyStr + endpoint);
 
 
             var stored = await _idempotencyService.GetStoredResponseAsync(key, method, hash);
@@ -62,6 +63,10 @@ namespace BidOne.Gateway.API.Filters
             if (executedContext.Result is ObjectResult result)
             {
                 await _idempotencyService.SaveResponseAsync(key, method, hash, result.Value, result.StatusCode ?? 200);
+            }
+            else
+            {
+                await _idempotencyService.RemoveKeyAsync(key, method, hash);
             }
         }
 
