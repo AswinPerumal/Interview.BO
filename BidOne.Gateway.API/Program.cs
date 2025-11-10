@@ -39,7 +39,11 @@ builder.Services.AddAutoMapper(x => x.AddMaps(typeof(ProductProfile).Assembly));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new() { Title = "BidOne.Gateway.API", Version = "v1" });
+    options.SwaggerDoc("v2", new() { Title = "BidOne.Gateway.API", Version = "v2" });
+}); ;
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddHttpClient<IErpClient, ErpClient>();
